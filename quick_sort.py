@@ -12,31 +12,37 @@ comparaisons = 0
 swaps = 0
 operations = 0
 
+parameters = {
+    "comparaisons": comparaisons,
+    "swaps": swaps,
+    "operations": operations
+}
+
 def partition(arr, low, high):
-    global comparaisons, swaps
+    global parameters
     i = (low - 1)
     pivot = arr[high]
     
     for j in range(low, high):
-        comparaisons += 1
-        draw_new_bars(arr, screen,operations, comparaisons, swaps, [j,high])
+        parameters["comparaisons"] += 1
+        draw_new_bars(arr, screen, parameters, [j,high])
 
         if arr[j] <= pivot:
             i += 1
-            swaps += 1
+            parameters["swaps"] += 1
             arr[i], arr[j] = arr[j], arr[i]
-            draw_new_bars(arr,screen, operations, comparaisons, swaps,[i,j])
+            draw_new_bars(arr, screen, parameters, [i,j])
     
     arr[i + 1], arr[high] = arr[high], arr[i + 1]
     
-    swaps += 1
-    draw_new_bars(arr, screen, operations, comparaisons, swaps, [i + 1, high]) 
+    parameters["swaps"] += 1
+    draw_new_bars(arr, screen, parameters, [i + 1, high]) 
     return i + 1
 
 def quick_sort (arr, low, high):
-    global operations
+    global parameters
     if low < high:
-        operations += 1
+        parameters["operations"] += 1
 
         pi = partition(arr, low, high)
         quick_sort(arr, low, pi - 1)
@@ -48,7 +54,7 @@ pygame.time.delay(500)
 quick_sort(array, 0, len(array) - 1)
 
 draw_array(array, screen, "Quick Sort Visualization")
-draw_stats(screen, operations, comparaisons, swaps)
+draw_stats(screen, parameters)
 
 draw_complexity("O(n log n)",screen)
 

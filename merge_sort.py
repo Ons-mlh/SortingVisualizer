@@ -6,11 +6,16 @@ pygame.init()
 screen = pygame.display.set_mode((1000, 650))
 pygame.display.set_caption("Merge Sort Visualization")
 
+running = True
 comparaisons = 0
 swaps = 0
 operations = 0
 
-running = True
+parameters = {
+    "comparaisons": comparaisons,
+    "swaps": swaps,
+    "operations": operations
+}
 
 def draw_new_bars(indices=[]):
    
@@ -21,14 +26,12 @@ def draw_new_bars(indices=[]):
             draw_bar(array, i, array, screen ,20)
 
 
-    draw_stats(screen, operations, comparaisons, swaps)
+    draw_stats(screen, parameters)
     pygame.display.update()
     pygame.time.delay(20)
 
-
-
 def merge(arr, l, m, r):
-    global comparaisons, swaps
+    global parameters
     
     n1 = m - l + 1
     n2 = r - m
@@ -47,14 +50,14 @@ def merge(arr, l, m, r):
     k = l     
 
     while i < n1 and j < n2:
-        comparaisons += 1
+        parameters["comparaisons"] += 1
         if L[i] <= R[j]:
             arr[k] = L[i]
             i += 1
         else:
             arr[k] = R[j]
             j += 1
-        swaps += 1
+        parameters["swaps"] += 1
         draw_new_bars([k])
         k += 1
 
@@ -62,21 +65,21 @@ def merge(arr, l, m, r):
         arr[k] = L[i]
         i += 1
         k += 1
-        swaps += 1
+        parameters["swaps"] += 1
         draw_new_bars([k])
 
     while j < n2:
         arr[k] = R[j]
         j += 1
         k += 1
-        swaps += 1
+        parameters["swaps"] += 1
         draw_new_bars([k])
 
 
 def merge_sort(arr, l, r):
-    global operations
+    global parameters
     if l < r:
-        operations += 1
+        parameters["operations"] += 1
         m = l+(r-l)//2
 
         merge_sort(arr, l, m)
@@ -88,7 +91,7 @@ pygame.time.delay(500)
 
 merge_sort(array,0,99)
 draw_array(array, screen, "Merge Sort Visualization")
-draw_stats(screen, operations, comparaisons, swaps)
+draw_stats(screen, parameters)
 
 draw_complexity("O(n log n)",screen)
 

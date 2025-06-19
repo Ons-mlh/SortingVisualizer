@@ -21,28 +21,12 @@ def draw_bar (arr, index,array,screen, y=20):
     pygame.draw.rect(screen, (0, 0, 0), (0, y + index * bar_height, 500, bar_height))
     pygame.draw.rect(screen,color,(0, y + index * bar_height, value, bar_height))
 
-def draw_new_bars(array, screen, operations, comparaisons, swaps,  indices=[],):
+def draw_new_bars(array, screen, parameters, indices=[],):
 
     for i in indices:
         draw_bar(array, i, array, screen, 20 )
 
-    draw_stats(screen, operations, comparaisons, swaps)
-    pygame.time.delay(20)
-
-def draw_new_bars2(array, screen, comparaisons, swaps,  indices=[],):
-
-    for i in indices:
-        draw_bar(array, i, array, screen, 20 )
-
-    draw_stats2(screen, comparaisons, swaps)
-    pygame.time.delay(20)
-
-def draw_new_bars3(array, screen, comparaisons, shifts,  indices=[],):
-
-    for i in indices:
-        draw_bar(array, i, array, screen, 20 )
-
-    draw_stats3(screen, comparaisons, shifts)
+    draw_stats(screen, parameters)
     pygame.time.delay(20)
 
 def draw_array(array,screen, title):
@@ -53,30 +37,13 @@ def draw_array(array,screen, title):
         draw_bar(array, i, array, screen, 20)
     pygame.display.update()
 
-def draw_stats (screen, operations, comparaisons, swaps):
+def draw_stats(screen, parameters):
     pygame.draw.rect(screen, (0, 0, 0), (600, 180, 220, 400))
-    text1 = font1.render(f"Recursive splits: {operations}", True, (255, 255, 255))
-    text2 = font1.render(f"Comparaisons: {comparaisons}", True, (255, 255, 255))
-    text3 = font1.render(f"Swaps: {swaps}", True, (255, 255, 255))
-    screen.blit(text1, (600, 200))
-    screen.blit(text2, (600, 300))
-    screen.blit(text3, (600, 400))
-    pygame.display.update()
-
-def draw_stats2 (screen, comparaisons, swaps):
-    pygame.draw.rect(screen, (0, 0, 0), (600, 180, 220, 400))
-    text1 = font1.render(f"Comparaisons: {comparaisons}", True, (255, 255, 255))
-    text2 = font1.render(f"Swaps: {swaps}", True, (255, 255, 255))
-    screen.blit(text1, (600, 200))
-    screen.blit(text2, (600, 300))
-    pygame.display.update()
-
-def draw_stats3 (screen, comparaisons, shifts):
-    pygame.draw.rect(screen, (0, 0, 0), (600, 180, 220, 400))
-    text1 = font1.render(f"Comparaisons: {comparaisons}", True, (255, 255, 255))
-    text2 = font1.render(f"Shifts: {shifts}", True, (255, 255, 255))
-    screen.blit(text1, (600, 200))
-    screen.blit(text2, (600, 300))
+    x = 0
+    for i, param in parameters.items():
+        text = font1.render(i + " : " +str(param), True, (255, 255, 255))
+        screen.blit(text, (600, 200 + x * 50))
+        x += 1
     pygame.display.update()
 
 def draw_complexity(complexity,screen):
