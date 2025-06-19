@@ -37,6 +37,14 @@ def draw_new_bars2(array, screen, comparaisons, swaps,  indices=[],):
     draw_stats2(screen, comparaisons, swaps)
     pygame.time.delay(20)
 
+def draw_new_bars3(array, screen, comparaisons, shifts,  indices=[],):
+
+    for i in indices:
+        draw_bar(array, i, array, screen, 20 )
+
+    draw_stats3(screen, comparaisons, shifts)
+    pygame.time.delay(20)
+
 def draw_array(array,screen, title):
     screen.fill((0, 0, 0))
     title = font2.render(f"{title}", True, (239, 71, 111))
@@ -59,6 +67,14 @@ def draw_stats2 (screen, comparaisons, swaps):
     pygame.draw.rect(screen, (0, 0, 0), (600, 180, 220, 400))
     text1 = font1.render(f"Comparaisons: {comparaisons}", True, (255, 255, 255))
     text2 = font1.render(f"Swaps: {swaps}", True, (255, 255, 255))
+    screen.blit(text1, (600, 200))
+    screen.blit(text2, (600, 300))
+    pygame.display.update()
+
+def draw_stats3 (screen, comparaisons, shifts):
+    pygame.draw.rect(screen, (0, 0, 0), (600, 180, 220, 400))
+    text1 = font1.render(f"Comparaisons: {comparaisons}", True, (255, 255, 255))
+    text2 = font1.render(f"Shifts: {shifts}", True, (255, 255, 255))
     screen.blit(text1, (600, 200))
     screen.blit(text2, (600, 300))
     pygame.display.update()

@@ -1,6 +1,6 @@
 import pygame 
 
-from sorting_utils import draw_bar, draw_stats, draw_array, draw_complexity, font1, font2, array
+from sorting_utils import draw_bar, draw_stats, draw_array, draw_complexity, array
 
 pygame.init()
 screen = pygame.display.set_mode((1000, 650))
