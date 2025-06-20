@@ -45,7 +45,7 @@ def draw_stats(screen, parameters):
     pygame.draw.rect(screen, (0, 0, 0), (600, 230, 220, 400))
     x = 0
     for i, param in parameters.items():
-        text = font1.render(i + " : " +str(param), True, (255, 255, 255))
+        text = font1.render(i + " : " + str(param), True, (255, 255, 255))
         screen.blit(text, (600, 250 + x * 50))
         x += 1
     pygame.display.update()
